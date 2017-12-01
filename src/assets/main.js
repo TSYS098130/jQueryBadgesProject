@@ -1,38 +1,47 @@
 $(function() {
+ 	$.ajax({
+		url: 'https://www.codeschool.com/users/3737126.json',
+		dataType: 'jsonp',
+		success: function(response) {
+		  // handle response
+		  //console.log('response', response)
+		  // console.log(response.user.username);
+		  console.log('response', response.courses.completed);
 
-	$.ajax({
-    url: 'https://www.codeschool.com/users/3737126.json',
-    dataType: 'jsonp',
-    success: function(response) {
-      addCourses(response.courses.completed);
-    }
-  });
-  
-  function addCourses(course) {
-  	var $badges = $('#badges');
-  	courses.forEach(function(course) {
-  		
-  		var $course = $('<div />', {
-  			'class': 'course'
-  		}).appendTo($badges);
-  		
-  		$('<h3 />', {
-  			text: course.title
-  		}).appendTo($course);
-  		
-  		$('<img />', {
-  			src: course.badge
-  		}).appendTo($course);
-  		
-  		$('<a />', {
-  			'class': 'btn btn-primary',
-  			target: '_blank',
-  			href: course.url,
-  			text: 'See Course'
-  		}).appendTo($course);
-  		
-  	})
-  	
-  }
-  
+		  addCourses(response.courses.completed); // call the function addCourses and pass in the JSON data
+		}
+  	});
+
+
+	function addCourses(courses){
+
+		var $badges = $('#badges'); // function for the badges variable
+		
+		courses.forEach(function(course) { // Start the loop 
+			var	$course = $('<div />', { // create the div
+					'class' : "course" // add the class
+				}).appendTo($badges); //append to the #badges ID
+			
+			// console.log(course.title);
+			// create and add the text to the h3 tag in course div
+			$('<h3 />', { 
+				text: course.title
+			}).appendTo($course);
+
+
+			$('<img />', { 
+				src: course.badge,
+				title: course.title
+			}).appendTo($course);
+
+			$('<a />', { 
+				href: course.url,
+				target: '_blank',
+				class: 'btn btn-primary',
+				text: "See Course"
+			}).appendTo($course);
+		});
+
+	}
+
 });
