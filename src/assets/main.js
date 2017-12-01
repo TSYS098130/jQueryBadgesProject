@@ -1,7 +1,7 @@
 $(function() {
 
  $.ajax({
-    url: 'https://www.codeschool.com/users/3737126',
+    url: 'https://www.codeschool.com/users/3737126.json',
     dataType: 'jsonp',
     success: function(response) {
       addCourses(response.courses.completed);
@@ -14,7 +14,7 @@ $(function() {
   	
   	courses.forEach(function(course) {
   		
-  		var $course = $('<div />' {
+  		var $course = $('<div />', {
   			'class': 'course'
   		}).appendTo($badges);
   		
